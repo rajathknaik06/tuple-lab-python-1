@@ -1,0 +1,43 @@
+""" Riya is organizing a gaming tournament and needs to rank the players based on their scores and levels. Each player is identified by an ID, has a score, and belongs to a specific level. The players should be sorted first by their scores in descending order, and if scores are equal, then by their levels in ascending order. 
+
+
+
+Riya wants to ensure that the highest-scoring players are listed first and within the same score, players with lower levels are ranked higher. Help Riya to create a program to perform the above functionality.
+
+Input format :
+The first line of input consists of an integer num_players, representing the number of players.
+
+Each of the next num_players lines contains three integers: player_id, score, and level.
+
+Output format :
+The output displays each player’s information in the sorted order as a tuple (player_id, score, level), with players sorted first by score (descending) and then by level (ascending) if scores are the same.
+
+"""
+
+# Read the number of players
+num_players = int(input())
+
+# Initialize an empty list to store player data
+players = []
+
+# Read player data
+for _ in range(num_players):
+    player_id, score, level = map(int, input().split())
+    players.append((player_id, score, level))
+
+# Sorting players using a simple comparison-based method
+# Convert the list of tuples to be sorted in place
+for i in range(num_players):
+    for j in range(num_players - 1):
+        # Unpack the tuples
+        id1, score1, level1 = players[j]
+        id2, score2, level2 = players[j + 1]
+        
+        # Compare scores and levels
+        if (score1 < score2) or (score1 == score2 and level1 > level2):
+            # Swap if needed
+            players[j], players[j + 1] = players[j + 1], players[j]
+
+# Display the sorted player list
+for player in players:
+    print(player)
